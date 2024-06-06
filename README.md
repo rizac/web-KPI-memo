@@ -40,7 +40,7 @@ Assuming you are in the log directory:
 
 1. To create an HTML report of **all log files** (compressed and uncompressed):
    ```commandline
-   zcat -f access.log* | goaccess -o report2.html --ignore-crawlers --log-format=COMBINED
+   zcat -f access.log* | goaccess -o report.html --ignore-crawlers --log-format=COMBINED
    ```
 2. To create an HTML report of **the most recent log file only**:
    ```commandline
@@ -50,3 +50,24 @@ Assuming you are in the log directory:
 
 Manual page of GoAccess (all commands and examples):
 [GoAccess Man Page](https://goaccess.io/man)
+
+
+## Utilities:
+
+### Copy log files locally
+
+(replace `local_access_log_dir` with the path of your destination directory)
+
+- Nginx:
+  ```
+  rsync -havz "user@host:/var/log/nginx/access.log*" local_access_log_dir
+  ```
+- Apache:
+  ```
+  rsync -havz "user@host:/var/log/apache2/access.log*" local_access_log_dir
+  ```
+
+**Note**
+  The trailing slash on `local_access_log_dir` is **irrelevant**. 
+  For ref (not the case in the examples above), a  trailing slash on a source path means "copy the contents of this directory", 
+  without a trailing slash it means "copy the directory".
