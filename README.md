@@ -1,4 +1,4 @@
-# Web-KPI
+# Web-KPI-memo
 
 This page summarizes how to extract Key performance indicator (KPI) 
 for web services (web portal or RestFul APIs) hosted by several web
@@ -9,17 +9,17 @@ servers (typically Nginx and Apache) using GoAccess.
 Servers usually log every access and error in specific directories
 typically located under `/var/log` in Ubuntu. For instance:
 
-| Server:          | Nginx                       | Apache                        |
-|------------------|-----------------------------|-------------------------------|
-| Access log file: | `/var/log/nginx/access.log` | `/var/log/apache2/access.log` |
-| Error log file:  | `/var/log/nginx/error.log`  | `/var/log/apache2/error.log`  |
+| Server:             | Nginx                       | Apache                        |
+|---------------------|-----------------------------|-------------------------------|
+| Access log file:    | `/var/log/nginx/access.log` | `/var/log/apache2/access.log` |
+| Error log file:     | `/var/log/nginx/error.log`  | `/var/log/apache2/error.log`  |
+| logrotate file[*]:  | `/etc/logrotate.d/nginx`    | `/etc/logrotate.d/apache2`    |
 
 
-In Ubuntu, you might see also several g-zipped files, e.g.
-`access.1.log.gz`, `access.2.log.gz`, and so on. These are files
-created by the utility `logrotate` which regularly checks
-and optimizes spaces on disk by compressing old log files
-(you can check out the settings in `/etc/logrotate.d/`)
+      [*] In Ubuntu, you might see also several g-zipped files, e.g.
+         `access.1.log.gz`, `access.2.log.gz`, and so on. These are files
+         created by the utility `logrotate` which regularly checks
+         and optimizes spaces on disk by compressing old log files
 
 ## GoAccess
 
