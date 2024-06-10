@@ -8,7 +8,7 @@ a web service analytics tool that parses and collect data from the server access
 <details>
 
    <summary>With respect to other analytics tools that were investigated (Google analytics, Matomo)
-   the procedure described is more low-level and generally simpler (click for details):</summary>
+   the procedure described is more low-level and generally simpler (click for details)</summary>
    
    PROs:
    
