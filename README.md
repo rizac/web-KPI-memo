@@ -2,25 +2,29 @@
 
 Simple Memo in the framework of key performance indicators (KPI) for web services.
 
-This document coverts the installation and collection of KPIs via 
-[GoAccess](https://goaccess.io/man), a web service analytics tool
-that parses and collect data from the server access logs.
+This document coverts the installation and collection of KPIs via [GoAccess](https://goaccess.io/man), 
+a web service analytics tool that parses and collect data from the server access logs.
 
 <details>
 
    <summary>With respect to other analytics tools that were investigated (Google analytics, Matomo)
-   the procedure described here differs in some aspects (click for detaails):</summary>
-   
+   the procedure described is more low-level and generally simpler (click for details):</summary>
    
    PROs:
+   
    1. Privacy (or more in general, full control over what can be disseminated or not)
+   
    2. No injection of JavaScript code in your hosted HTML, which in turn allows to:
+
       2a. Keep code and analytics separated
+
       2b. Track each request, not only HTML pages. In other words, we will be able to track access to URLs serving all possible data formats (e.g. RestFul APIs URLs)
    
    CONs:
+   
    1. By tracking the server log and not single HTML pages, a lot of noise might be generated (e.g. by [web crawlers](https://en.wikipedia.org/wiki/Web_crawler)).
       Users will need to spend some time filtering this in the final report page
+   
    2. In several cases, some knoweledge of server logs might be required (see e.g. `logorotate` below)
 
 </details>
@@ -28,9 +32,7 @@ that parses and collect data from the server access logs.
 
 ## Viaualize Analytics in HTML
 
-First Install GoAccess (`brew install goaccess` on macos, see 
-[here](https://goaccess.io/download) otherwise)
-
+First Install GoAccess (`brew install goaccess` on macos, see [here](https://goaccess.io/download) otherwise).
 
 Assuming you are in the log directory, adn that the directory contains a GEoIP database named `dbip-country-lite.mmdb` (see [Download GeoIP database](download#geoip#database) for info.
 For ref, a database file is included in this repo, but it is not regularly updated)
@@ -45,9 +47,7 @@ For ref, a database file is included in this repo, but it is not regularly updat
    ```
 (for info on the pipe command see [here](https://stackoverflow.com/a/39240021))
 
-Manual page of GoAccess (all commands and examples):
-[GoAccess Man Page](https://goaccess.io/man)
-
+Manual page of GoAccess (all commands and examples): [GoAccess Man Page](https://goaccess.io/man)
 
 
 ## Appendix
