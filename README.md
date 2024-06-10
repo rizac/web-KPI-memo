@@ -34,7 +34,7 @@ a web service analytics tool that parses and collect data from the server access
 
 First Install GoAccess (`brew install goaccess` on macos, see [here](https://goaccess.io/download) otherwise).
 
-Assuming you are in the log directory, adn that the directory contains a GEoIP database named `dbip-country-lite.mmdb` (see [Download GeoIP database](download#geoip#database) for info.
+Assuming you are in the log directory, and that the directory contains a GEoIP database named `dbip-country-lite.mmdb` (see [Download GeoIP database](#download-geoip-database) for info.
 For ref, a database file is included in this repo, but it is not regularly updated)
 
 1. To create an HTML report of **all log files** (compressed and uncompressed):
@@ -92,7 +92,8 @@ typically located under `/var/log` in Ubuntu. For instance:
       }
 ```
 
-You can change e,g, `daily` to `weekly` to log rotate every week, set `rotate 55` (or any number >= 54 in order to save at least last year with `weekly`), and even specify a `mail <email_address>` parameter so that the logs are sent to the email when deleted. More info [here](https://linux.die.net/man/8/logrotate)
+You can change e,g, `daily` to `weekly` to log rotate every week, set `rotate 55` (or any number >= 54 in order to save at least last year with `weekly`), 
+and even specify a `mail <email_address>` parameter so that the logs are sent to the email when deleted. More info [here](https://linux.die.net/man/8/logrotate)
 
 
 ### Download GeoIP Database
