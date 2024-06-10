@@ -98,12 +98,13 @@ and even specify a `mail <email_address>` parameter so that the logs are sent to
 
 ### Download GeoIP Database
 
-(Full details under GeoLocation Options in the [GEOLOCATION OPTIONS of the GoAccess man page](https://goaccess.io/man))
+- Download the IP to Country database *in MMDB format* from here: https://db-ip.com/db/download/ip-to-country-lite
+  (one copy also in this repo, but is is not updated regularly).
+  You can also download other databases (e.g., IP to city and so on).
 
-In a Nutshell: Get IP to Country database *in MMDB format* from here: https://db-ip.com/db/download/ip-to-country-lite (one copy also in this repo, but is is not updated regularly).
-You can also download other databases (e.g., IP to city and so on).
+- Unzip the file (`gunzip <file_name>.mmdb.gz`) and then pass the unzipped name/full path as `--geoip-database` argument 
 
-Unzip the file (`gunzip <file_name>.mmdb.gz`) and then pass the unzipped name/full path as `--geoip-database` argument 
+See also [Geolocation options in the GoAccess man page](https://goaccess.io/man)
 
 
 ### Copy log files locally
