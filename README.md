@@ -1,9 +1,10 @@
 # Web-KPI-memo
 
-Simple Memo in the framework of key performance indicators (KPI) for web services.
+Key performance inicators (KPI) for web services can be extracted in several ways, usually
+via web service analytics tools.
 
-This document coverts the installation and collection of KPIs via [GoAccess](https://goaccess.io/man), 
-a web service analytics tool that parses and collect data from the server access logs.
+In this document, we shortly describe how to install and run [GoAccess](https://goaccess.io/man), 
+an analytics tool that parses and collect data from the server access logs.
 
 <details>
 
@@ -12,29 +13,26 @@ a web service analytics tool that parses and collect data from the server access
    
    PROs:
    
-   1. Privacy (or more in general, full control over what can be disseminated or not)
+   1. Privacy (100% data owneership) and full control over what can be disseminated or not
    
    2. No injection of JavaScript code in your hosted HTML, which in turn allows to:
 
-      2a. Keep code and analytics separated
+      2a. Keep core and analytics codebase separated
 
-      2b. Track each request, not only HTML pages. In other words, we will be able to track access to URLs serving all possible data formats (e.g. RestFul APIs URLs)
+      2b. Track each request, not only HTML pages. In other words, track access to URLs serving any data format (e.g. RestFul APIs URLs)
    
    CONs:
    
    1. By tracking the server log and not single HTML pages, a lot of noise might be generated (e.g. by [web crawlers](https://en.wikipedia.org/wiki/Web_crawler)).
-      Users will need to spend some time filtering this in the final report page
+      Although with some settings the output can be cleaned up, users might need to spend some time filtering the final report page
    
-   2. In several cases, some knoweledge of server logs might be required (see e.g. `logorotate` below)
+   2. In several cases, some knoweledge of [server logs might be required](#Servers-Logging-and-logrotate)
 
 </details>
 
-
-## Viaualize Analytics in HTML
-
 First Install GoAccess (`brew install goaccess` on macos, see [here](https://goaccess.io/download) otherwise).
 
-Assuming you are in the log directory, and that the directory contains a GEoIP database named `dbip-country-lite.mmdb` (see [Download GeoIP database](#download-geoip-database) for info.
+Assuming you are in the [log directory](#Servers-Logging-and-logrotate), and that the directory contains a GEoIP database named `dbip-country-lite.mmdb` (see [Download GeoIP database](#download-geoip-database) for info.
 For ref, a database file is included in this repo, but it is not regularly updated)
 
 1. To create an HTML report of **all log files** (compressed and uncompressed):
