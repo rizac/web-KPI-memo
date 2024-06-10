@@ -20,19 +20,35 @@ CONs:
    Users will need to spend some time filtering this in the final report page
 2. In several cases, some knoweledge of server logs might be required (see e.g. `logorotate` below)
 
-   
-**In a nutshell**, you can install GoAccess, go into your server log directory, and then create an HTML report of the
-logs via:
-```
-goaccess access.log -o report.html --ignore-crawlers --log-format=COMBINED
-```
 
-However, depending on your server configuration, the command generates the analytics only for the last day/week. 
-In this document, we will walk the user through a more detailed guide explaining how to customize
-your analytics
+## Viaualize Analytics in HTML
+
+First Install GoAccess (`brew install goaccess` on macos, see 
+[here](https://goaccess.io/download) otherwise)
 
 
-## Introduction
+Assuming you are in the log directory, adn that the directory contains a GEoIP database named `dbip-country-lite.mmdb` (see [Download GeoIP database](download#geoip#database) for info.
+For ref, a database file is included in this repo, but it is not regularly updated)
+
+1. To create an HTML report of **all log files** (compressed and uncompressed):
+   ```commandline
+   zcat -f access.log* | goaccess -o report.html --ignore-crawlers --log-format=COMBINED --geoip-database dbip-country-lite.mmdb
+   ```
+2. To create an HTML report of **the most recent log file only**:
+   ```commandline
+   goaccess access.log -o report.html --ignore-crawlers --log-format=COMBINED --geoip-database dbip-country-lite.mmdb
+   ```
+(for info on the pipe command see [here](https://stackoverflow.com/a/39240021))
+
+Manual page of GoAccess (all commands and examples):
+[GoAccess Man Page](https://goaccess.io/man)
+
+
+
+## Appendix
+
+
+### Servers Logging and logrotate
 
 
 Servers usually log every access request and error request in specific directories
@@ -73,42 +89,16 @@ typically located under `/var/log` in Ubuntu. For instance:
 
 You can change e,g, `daily` to `weekly` to log rotate every week, set `rotate 55` (or any number >= 54 in order to save at least last year with `weekly`), and even specify a `mail <email_address>` parameter so that the logs are sent to the email when deleted. More info [here](https://linux.die.net/man/8/logrotate)
 
-## GoAccess
-
-GoAccess is the quickest solution for creating a simple report from a given access log. 
-
-First Install GoAccess (`brew install goaccess` on macos, see 
-[here](https://goaccess.io/download) otherwise)
-
-
-### Create HTML Web Analytics report (`report.html`)
-
-Assuming you are in the log directory, adn that the directory contains a GEoIP database named `dbip-country-lite-2024-06.mmdb` (see [Download GeoIP database](download#geoip#database) for info)
-
-1. To create an HTML report of **all log files** (compressed and uncompressed):
-   ```commandline
-   zcat -f access.log* | goaccess -o report.html --ignore-crawlers --log-format=COMBINED --geoip-database dbip-country-lite-2024-06.mmdb
-   ```
-2. To create an HTML report of **the most recent log file only**:
-   ```commandline
-   goaccess access.log -o report.html --ignore-crawlers --log-format=COMBINED--geoip-database dbip-country-lite-2024-06.mmdb
-   ```
-(for info on the pipe command see [here](https://stackoverflow.com/a/39240021))
-
-Manual page of GoAccess (all commands and examples):
-[GoAccess Man Page](https://goaccess.io/man)
-
-
-## Misc
 
 ### Download GeoIP Database
 
 (Full details under GeoLocation Options in the [GEOLOCATION OPTIONS of the GoAccess man page](https://goaccess.io/man))
 
-In a Nutshell: Get IP to Country database *in MMDB format* from here: https://db-ip.com/db/download/ip-to-country-lite (one copy also in this repo, last updates mid 2024).
+In a Nutshell: Get IP to Country database *in MMDB format* from here: https://db-ip.com/db/download/ip-to-country-lite (one copy also in this repo, but is is not updated regularly).
 You can also download other databases (e.g., IP to city and so on).
 
-Unzip the file and then pass it s name/full path as `--geoip-database` argument 
+Unzip the file (`gunzip <file_name>.mmdb.gz`) and then pass the unzipped name/full path as `--geoip-database` argument 
+
 
 ### Copy log files locally
 
