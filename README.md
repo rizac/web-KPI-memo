@@ -1,9 +1,10 @@
 # Web-KPI-memo
 
-Simple Memo to obtain    
-web services key performance indicators (KPI) by
-visualizing the server access logs with 
-[GoAccess](https://goaccess.io/man)
+Simple Memo in the framework of key performance indicators (KPI) for web services.
+
+This document coverts the installation and collection of KPIs via 
+[GoAccess](https://goaccess.io/man), a web service analytics tool
+that parses and collect data from the server access logs.
 
 With respect to other analytics tools that were investigated (Google analytics, Matomo)
 the process exemplified here has:
@@ -82,15 +83,15 @@ First Install GoAccess (`brew install goaccess` on macos, see
 
 ### Create HTML Web Analytics report (`report.html`)
 
-Assuming you are in the log directory:
+Assuming you are in the log directory, adn that the directory contains a GEoIP database named `dbip-country-lite-2024-06.mmdb` (see [Download GeoIP database](download#geoip#database) for info)
 
 1. To create an HTML report of **all log files** (compressed and uncompressed):
    ```commandline
-   zcat -f access.log* | goaccess -o report.html --ignore-crawlers --log-format=COMBINED
+   zcat -f access.log* | goaccess -o report.html --ignore-crawlers --log-format=COMBINED --geoip-database dbip-country-lite-2024-06.mmdb
    ```
 2. To create an HTML report of **the most recent log file only**:
    ```commandline
-   goaccess access.log -o report.html --ignore-crawlers --log-format=COMBINED
+   goaccess access.log -o report.html --ignore-crawlers --log-format=COMBINED--geoip-database dbip-country-lite-2024-06.mmdb
    ```
 (for info on the pipe command see [here](https://stackoverflow.com/a/39240021))
 
@@ -99,6 +100,15 @@ Manual page of GoAccess (all commands and examples):
 
 
 ## Misc
+
+### Download GeoIP Database
+
+(Full details under GeoLocation Options in the [GEOLOCATION OPTIONS of the GoAccess man page](https://goaccess.io/man))
+
+In a Nutshell: Get IP to Country database *in MMDB format* from here: https://db-ip.com/db/download/ip-to-country-lite (one copy also in this repo, last updates mid 2024).
+You can also download other databases (e.g., IP to city and so on).
+
+Unzip the file and then pass it s name/full path as `--geoip-database` argument 
 
 ### Copy log files locally
 
@@ -117,3 +127,5 @@ Manual page of GoAccess (all commands and examples):
   The trailing slash on `local_access_log_dir` is **irrelevant**. 
   For ref (not the case in the examples above), a  trailing slash on a source path means "copy the contents of this directory", 
   without a trailing slash it means "copy the directory".
+
+  Here e alink for a useful [shell interactive explanation tool](https://explainshell.com/explain?cmd=rsync+-havz+--delete+user%40remote.host%3A%2Fpath%2Fto%2Fcopy+%2Fpath%2Fto%2Flocal%2Fstorage)
