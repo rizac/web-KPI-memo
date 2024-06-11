@@ -1,19 +1,16 @@
 # Web-KPI-memo
 
 Key performance inicators (KPI) for web services can be extracted in several ways, usually
-via web service analytics tools.
-
-In this document, we shortly describe how to install and run [GoAccess](https://goaccess.io/man), 
+via analytics tools. In this document, we shortly describe how to install and run [GoAccess](https://goaccess.io/man), 
 an analytics tool that parses and collect data from the server access logs.
 
 <details>
 
-   <summary>With respect to other analytics tools that were investigated (Google analytics, Matomo)
-   the procedure described is more low-level and generally simpler (click for details)</summary>
+   <summary>Compare with Google analytics and Matomo (click for details)</summary>
    
    PROs:
    
-   1. Privacy (100% data owneership) and full control over what can be disseminated or not
+   1. Privacy (100% data ownership, as Matomo) and full control over what can be disseminated or not
    
    2. No injection of JavaScript code in your hosted HTML, which in turn allows to:
 
@@ -23,10 +20,11 @@ an analytics tool that parses and collect data from the server access logs.
    
    CONs:
    
-   1. By tracking the server log and not single HTML pages, a lot of noise might be generated (e.g. by [web crawlers](https://en.wikipedia.org/wiki/Web_crawler)).
-      Although with some settings the output can be cleaned up, users might need to spend some time filtering the final report page
+   1. By tracking the server log, a lot of noise might be included in the final report (see e.g. by [web crawlers](https://en.wikipedia.org/wiki/Web_crawler)).
+      See option `--ignore-crawlers` below or the [filtering the logs](#Filtering-server-logs)) section. In any case, you might still need some workaround to extract
+      the KPIs you need
    
-   2. In several cases, some knoweledge of [server logs might be required](#Servers-Logging-and-logrotate)
+   3. In several cases, some knoweledge of [server logs might be required](#Servers-Logging-and-logrotate)
 
 </details>
 
@@ -103,6 +101,10 @@ and even specify a `mail <email_address>` parameter so that the logs are sent to
 
 See also [Geolocation options in the GoAccess man page](https://goaccess.io/man)
 
+### Filtering server logs 
+
+If your report still contains a lot of noise (even with the `--ignore-crawlers` option activated), you can filter
+server logs beforehand before feeding GoAccess. See a nice article [here](https://www.philnewton.net/blog/filtering-referer-spam/)
 
 ### Copy log files locally
 
