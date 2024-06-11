@@ -32,20 +32,19 @@ an analytics tool that parses and collect data from the server access logs.
 
 First Install GoAccess (`brew install goaccess` on macos, see [here](https://goaccess.io/download) otherwise).
 
-Assuming you are in the [log directory](#Servers-Logging-and-logrotate), and that the directory contains a GEoIP database named `dbip-country-lite.mmdb` (see [Download GeoIP database](#download-geoip-database) for info.
+Then, assuming you are in the [log directory](#Servers-Logging-and-logrotate), and that the directory contains a GEoIP database named `dbip-country-lite.mmdb` (see [Download GeoIP database](#download-geoip-database) for info.
 For ref, a database file is included in this repo, but it is not regularly updated)
 
-1. To create an HTML report of **all log files** (compressed and uncompressed):
+1. To create an HTML report of **all log files**, compressed and uncompressed (Explanation [here](https://stackoverflow.com/a/39240021)):
    ```commandline
-   zcat -f access.log* | goaccess -o report.html --ignore-crawlers --log-format=COMBINED --geoip-database dbip-country-lite.mmdb
+   zcat -f access.log* | goaccess -o report.html -q --log-format=COMBINED --ignore-crawlers --anonymize-ip --geoip-database=dbip-country-lite.mmdb
    ```
 2. To create an HTML report of **the most recent log file only**:
    ```commandline
-   goaccess access.log -o report.html --ignore-crawlers --log-format=COMBINED --geoip-database dbip-country-lite.mmdb
+   goaccess access.log -o report.html -q --log-format=COMBINED --ignore-crawlers --anonymize-ip --geoip-database=dbip-country-lite.mmdb
    ```
-(for info on the pipe command see [here](https://stackoverflow.com/a/39240021))
 
-Manual page of GoAccess (all commands and examples): [GoAccess Man Page](https://goaccess.io/man)
+**All parameters explanation and examples can be found in the [GoAccess Man Page](https://goaccess.io/man)**
 
 
 ## Appendix
