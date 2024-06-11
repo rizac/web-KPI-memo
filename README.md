@@ -24,13 +24,13 @@ an analytics tool that parses and collect data from the server access logs.
       See option `--ignore-crawlers` below or the [filtering the logs](#Filtering-server-logs)) section. In any case, you might still need some workaround to extract
       the KPIs you need
    
-   3. In several cases, some knoweledge of [server logs might be required](#Servers-Logging-and-logrotate)
+   3. In several cases, some knoweledge of [server logs might be required](#Servers-logging)
 
 </details>
 
 First Install GoAccess (`brew install goaccess` on macos, see [here](https://goaccess.io/download) otherwise).
 
-Then, assuming you are in the [log directory](#Servers-Logging-and-logrotate), and that the directory contains a GEoIP database named `dbip-country-lite.mmdb` (see [Download GeoIP database](#download-geoip-database) for info.
+Then, assuming you are in the [log directory](#Servers-logging), and that the directory contains a GEoIP database named `dbip-country-lite.mmdb` (see [Download GeoIP database](#download-geoip-database) for info.
 For ref, a database file is included in this repo, but it is not regularly updated)
 
 1. To create an HTML report of **all log files**, compressed and uncompressed (Explanation [here](https://stackoverflow.com/a/39240021)):
@@ -48,24 +48,28 @@ For ref, a database file is included in this repo, but it is not regularly updat
 ## Appendix
 
 
-### Servers Logging and logrotate
+### Servers logging
 
 
-Servers usually log every access request and error request in specific directories
-typically located under `/var/log` in Ubuntu. For instance:
+Servers usually log every access request and error request in specific **log directories**
+typically located under `/var/log/` in Ubuntu. For instance:
 
 | Server:             | Nginx                       | Apache                        |
 |---------------------|-----------------------------|-------------------------------|
 | Access log file:    | `/var/log/nginx/access.log` | `/var/log/apache2/access.log` |
 | Error log file:     | `/var/log/nginx/error.log`  | `/var/log/apache2/error.log`  |
-| logrotate file [*]: | `/etc/logrotate.d/nginx`    | `/etc/logrotate.d/apache2`    |
+| logrotate file:     | `/etc/logrotate.d/nginx`    | `/etc/logrotate.d/apache2`    |
 
 
-[*] In Ubuntu, alongside `access.log` you might see also several g-zipped files, e.g.
-    `access.1.log.gz`, `access.2.log.gz`, and so on. These are files
-    created by the utility `logrotate` which regularly checks
-    and optimizes spaces on disk by compressing old log files.
-    For instance, `less /etc/logrotate.d/nginx` might show the content of a typical logrotate config. for Nginx:
+#### Logrotate
+
+In Ubuntu, alongside `access.log` you might see also several g-zipped files, e.g.
+`access.1.log.gz`, `access.2.log.gz`, and so on. These are files
+created by the utility `logrotate` which regularly checks
+and optimizes spaces on disk by compressing old log files, *rotating* (rename files with a different suffix) 
+and eventually deleting them.
+
+For instance, `less /etc/logrotate.d/nginx` might show the content of a typical logrotate config. for Nginx:
 ```
       /var/log/nginx/*.log {
         daily
