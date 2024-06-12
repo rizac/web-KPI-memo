@@ -30,7 +30,7 @@ an analytics tool that parses and collect data from the server access logs.
 
 First Install GoAccess (`brew install goaccess` on macos, see [here](https://goaccess.io/download) otherwise).
 
-Then, assuming you are in the [log directory](#Servers-logging), and that the directory contains a GEoIP database named `dbip-country-lite.mmdb` (see [Download GeoIP database](#download-geoip-database) for info.
+Then, assuming you are in the [log directory](#Servers-logging), and that the directory contains a GeoIP database named `dbip-country-lite.mmdb` (see [Download GeoIP database](#download-geoip-database) for info.
 For ref, a database file is included in this repo, but it is not regularly updated)
 
 1. To create an HTML report of **all log files**, compressed and uncompressed (Explanation [here](https://stackoverflow.com/a/39240021)):
@@ -106,6 +106,9 @@ Please [**read the man page of logrotate**](https://linux.die.net/man/8/logrotat
 
 
 ### Download GeoIP Database
+
+A GeoIP database is a database mapping IPs to a Geo location, allowing to know the provenance of the 
+IPs accessing your web service. To get a GeoIP database:
 
 - Download the IP to Country database *in MMDB format* from here: https://db-ip.com/db/download/ip-to-country-lite
   (one copy also in this repo, but is is not updated regularly).
