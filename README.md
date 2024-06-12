@@ -64,12 +64,14 @@ typically located under `/var/log/` in Ubuntu. For instance:
 #### Logrotate
 
 In Ubuntu, alongside `access.log` you might see also several g-zipped files, e.g.
-`access.1.log.gz`, `access.2.log.gz`, and so on. These are files
-created by the utility `logrotate` which regularly checks
-and optimizes spaces on disk by compressing old log files, *rotating* (rename files with a different suffix) 
-and eventually deleting them.
+`access.1.log.gz`, `access.2.log.gz`. These files are created by the system utility 
+`logrotate` that periodically renames and compresses a log file when it
+reaches a certain threshold (usually a maximum file size, age, or number of records),
+creating a new empty file with the original name (this process is called Log rotation). 
 
-For instance, `less /etc/logrotate.d/nginx` might show the content of a typical logrotate config. for Nginx:
+`logrotate` can be configured for both Nginx and Apache. 
+For instance, `less /etc/logrotate.d/nginx`:
+
 ```
       /var/log/nginx/*.log {
         daily
@@ -91,8 +93,12 @@ For instance, `less /etc/logrotate.d/nginx` might show the content of a typical 
       }
 ```
 
-You can change e,g, `daily` to `weekly` to log rotate every week, set `rotate 55` (or any number >= 54 in order to save at least last year with `weekly`), 
-and even specify a `mail <email_address>` parameter so that the logs are sent to the email when deleted. More info [here](https://linux.die.net/man/8/logrotate)
+The above renames and compresses (`compress`) any `*.log` file every day (`daily`) only if the log file is non empty (`notifempty`),
+eventually deleting it after 14 days (`rotate 14`).  If you need to extract yearly-based KPIs, i.e., run analytics on the logs of the last year, then
+you could set `rotate 365` or, to keep less files, set `weekly` instead of `daily` and `rotate 55` (or any number >=54). 
+
+In any case, be careful not to create a huge amount of log files (this also depends on your web service traffic).
+Please **[read the man page of logrotate](https://linux.die.net/man/8/logrotate)** for further info.
 
 
 ### Download GeoIP Database
