@@ -65,12 +65,16 @@ typically located under `/var/log/` in Ubuntu. For instance:
 
 In Ubuntu, alongside `access.log` you might see also several g-zipped files, e.g.
 `access.1.log.gz`, `access.2.log.gz`. These files are created by the system utility 
-`logrotate` that periodically renames and compresses a log file when it
-reaches a certain threshold (usually a maximum file size, age, or number of records),
-creating a new empty file with the original name (this process is called Log rotation). 
+[logrotate](https://linux.die.net/man/8/logrotate)
 
-`logrotate` can be configured for both Nginx and Apache. 
-For instance, `less /etc/logrotate.d/nginx`:
+`logrotate` can be configured for both Nginx and Apache. Config files
+are usually located under `/etc/logrotate.d/`.
+For instance, here below the content of the file `/etc/logrotate.d/nginx`
+shows how `logrotate` is configured to rename and compress (`compress`) 
+every day (`daily`) 
+any file matching `/var/log/nginx/*.log`
+only if not empty (`notifempty`),
+eventually deleting it after 14 days (`rotate 14`):
 
 ```
       /var/log/nginx/*.log {
@@ -93,12 +97,12 @@ For instance, `less /etc/logrotate.d/nginx`:
       }
 ```
 
-The above renames and compresses (`compress`) any `*.log` file every day (`daily`) only if the log file is non empty (`notifempty`),
-eventually deleting it after 14 days (`rotate 14`).  If you need to extract yearly-based KPIs, i.e., run analytics on the logs of the last year, then
+If you need to extract yearly-based KPIs, i.e., run analytics on the logs of the last year, then
 you could set `rotate 365` or, to keep less files, set `weekly` instead of `daily` and `rotate 55` (or any number >=54). 
+In any case, remember that the main goal of logrotate is to optimize the amount of log files and space. If your site has a high
+traffic, be careful with the settings.
 
-In any case, be careful not to create a huge amount of log files (this also depends on your web service traffic).
-Please **[read the man page of logrotate](https://linux.die.net/man/8/logrotate)** for further info.
+Please [**read the man page of logrotate**](https://linux.die.net/man/8/logrotate) for further info.
 
 
 ### Download GeoIP Database
