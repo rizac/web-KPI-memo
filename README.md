@@ -76,12 +76,27 @@ See also [Geolocation options in the GoAccess man page](https://goaccess.io/man)
 Servers usually log every access request and error request in specific **log directories**
 typically located under `/var/log/` in Ubuntu. For instance:
 
+  |                     | Nginx                       |
+  |---------------------|-----------------------------|
+  | Access log file:    | `/var/log/nginx/access.log` |
+  | Error log file:     | `/var/log/nginx/error.log`  |
+  | logrotate file:     | `/etc/logrotate.d/nginx`    |
+
+  
+  |                     | Apache                        |
+  |---------------------|-------------------------------|
+  | Access log file:    | `/var/log/apache2/access.log` |
+  | Error log file:     | `/var/log/apache2/error.log`  |
+  | logrotate file:     | `/etc/logrotate.d/apache2`    |
+
+
+<!--
 | Server:             | Nginx                       | Apache                        |
 |---------------------|-----------------------------|-------------------------------|
 | Access log file:    | `/var/log/nginx/access.log` | `/var/log/apache2/access.log` |
 | Error log file:     | `/var/log/nginx/error.log`  | `/var/log/apache2/error.log`  |
 | logrotate file:     | `/etc/logrotate.d/nginx`    | `/etc/logrotate.d/apache2`    |
-
+-->
 
 
 #### Logrotate
