@@ -47,13 +47,27 @@ For ref, a database file is included in this repo, but it is not regularly updat
 
 ## Appendix
 
-
 <img align="right" width="350" src="https://github.com/rizac/web-KPI-memo/blob/main/server-access-report-example.jpg?raw=true" />
+
 
 ### Example report
 
 This repository contains an example server access report, converted as image 
 for illustrative purposes and embedded in this document (see image on the right) 
+
+
+### Download GeoIP Database
+
+A GeoIP database is a database mapping IPs to a Geo location, allowing to know the provenance of the 
+IPs accessing your web service. To get a GeoIP database:
+
+- Download the IP to Country database *in MMDB format* from here: https://db-ip.com/db/download/ip-to-country-lite
+  (one copy also in this repo, but is is not updated regularly).
+  You can also download other databases (e.g., IP to city and so on).
+
+- Unzip the file (`gunzip <file_name>.mmdb.gz`) and then pass the unzipped name/full path as `--geoip-database` argument 
+
+See also [Geolocation options in the GoAccess man page](https://goaccess.io/man)
 
 
 ### Servers logging
@@ -67,6 +81,7 @@ typically located under `/var/log/` in Ubuntu. For instance:
 | Access log file:    | `/var/log/nginx/access.log` | `/var/log/apache2/access.log` |
 | Error log file:     | `/var/log/nginx/error.log`  | `/var/log/apache2/error.log`  |
 | logrotate file:     | `/etc/logrotate.d/nginx`    | `/etc/logrotate.d/apache2`    |
+
 
 
 #### Logrotate
@@ -112,19 +127,6 @@ traffic, be careful with the settings.
 
 Please [**read the man page of logrotate**](https://linux.die.net/man/8/logrotate) for further info.
 
-
-### Download GeoIP Database
-
-A GeoIP database is a database mapping IPs to a Geo location, allowing to know the provenance of the 
-IPs accessing your web service. To get a GeoIP database:
-
-- Download the IP to Country database *in MMDB format* from here: https://db-ip.com/db/download/ip-to-country-lite
-  (one copy also in this repo, but is is not updated regularly).
-  You can also download other databases (e.g., IP to city and so on).
-
-- Unzip the file (`gunzip <file_name>.mmdb.gz`) and then pass the unzipped name/full path as `--geoip-database` argument 
-
-See also [Geolocation options in the GoAccess man page](https://goaccess.io/man)
 
 ### Filtering server logs 
 
