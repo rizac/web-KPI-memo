@@ -48,6 +48,14 @@ For ref, a database file is included in this repo, but it is not regularly updat
 ## Appendix
 
 
+<img align="right" width="350" src="https://github.com/rizac/web-KPI-memo/blob/main/server-access-report-example.jpg?raw=true" />
+
+### Example report
+
+This repository contains an example server access report, converted as image 
+for illustrative purposes and embedded in this document (see image on the right) 
+
+
 ### Servers logging
 
 
