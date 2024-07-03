@@ -106,7 +106,7 @@ In Ubuntu, alongside `access.log` you might see also several g-zipped files, e.g
 [logrotate](https://linux.die.net/man/8/logrotate)
 
 `logrotate` can be configured for both Nginx and Apache. Config files
-are usually located under `/etc/logrotate.d/`.
+are usually located under `/etc/logrotate.d/` and can be easily modified [with no need to restart anything](https://unix.stackexchange.com/a/620676).
 For instance, here below the content of the file `/etc/logrotate.d/nginx`
 shows how `logrotate` is configured to rename and compress (`compress`) 
 every day (`daily`) 
