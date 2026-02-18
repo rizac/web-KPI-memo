@@ -34,12 +34,15 @@ Then, assuming you are in the [log directory](#Servers-logging), and that the di
 For ref, a database file is included in this repo, but it is not regularly updated)
 
 1. To create an HTML report of **all log files**, compressed and uncompressed (Explanation [here](https://stackoverflow.com/a/39240021)):
+   Append all *gz logs (logrotated, see below) into one. This will collect your time period (usually one yer) except the last one (usually last two weeks).
    ```commandline
-   zcat -f access.log* | goaccess -o report.html -q --log-format=COMBINED --ignore-crawlers --anonymize-ip --geoip-database=dbip-country-lite.mmdb
+   zcat $(ls -tr access.log*.gz) > combined_logs.log
    ```
+   Now run the command below **changing `access.log` with `combined_logs.log`**
+   
 2. To create an HTML report of **the most recent log file only**:
    ```commandline
-   goaccess access.log -o report.html -q --log-format=COMBINED --ignore-crawlers --anonymize-ip --geoip-database=dbip-country-lite.mmdb
+   goaccess access.log -o traffic_report.html -q --log-format=COMBINED --ignore-crawlers --anonymize-ip --geoip-database=dbip-country-lite.mmdb
    ```
 
 **All parameters explanation and examples can be found in the [GoAccess Man Page](https://goaccess.io/man)**
